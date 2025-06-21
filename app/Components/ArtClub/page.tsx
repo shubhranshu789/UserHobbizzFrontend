@@ -50,7 +50,7 @@ export default function Home() {
                         { icon: "globe", label: "Club Domain" },
                         { icon: "briefcase", label: "Club Affairs" },
                         { icon: "git-branch", label: "Club Chapters" },
-                        { icon: "newspaper", label: "Club News", Id: "ClubNews" },
+                        { icon: "newspaper", label: "Club News", id: "ClubNews" },
                         { icon: "award", label: "Hall of Fame" },
                         { icon: "image", label: "Gallery", id: "Gallery"},
                         { icon: "trophy", label: "Contests", id: "Contest" },
