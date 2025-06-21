@@ -231,18 +231,50 @@ const ClubNewsForm = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Image URL
-              </label>
-              <input
-                type="file"
-                name="imageUrl"
-                placeholder="Image URL"
-                value={formData.imageUrl}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Upload Image
+  </label>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={async (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        // setSelectedFile(file); // Store for later use (optional)
+
+        // Upload to Cloudinary
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "hobbizz");
+        data.append("cloud_name", "dvg17xl1i");
+
+        try {
+          const res = await fetch("https://api.cloudinary.com/v1_1/dvg17xl1i/image/upload", {
+            method: "POST",
+            body: data,
+          });
+
+          const uploadResult = await res.json();
+
+          if (uploadResult.url) {
+            setFormData((prev) => ({
+              ...prev,
+              imageUrl: uploadResult.url,
+            }));
+            toast.success("Image uploaded successfully!");
+          } else {
+            toast.error("Image upload failed!");
+          }
+        } catch (err) {
+          toast.error("Error uploading image");
+          console.error(err);
+        }
+      }
+    }}
+    className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
