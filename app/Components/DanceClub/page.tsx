@@ -8,29 +8,19 @@ import DraggableElement from "../ArtClub/files/draggable-element"
 import { useRouter } from 'next/navigation';
 
 
-// import "../../Components/ArtClub/Library"
-// import "../../Components/ArtClub/Gallery"
-
-
 export default function Home() {
 
     const router = useRouter();
 
-
+ 
     const gotoArtClub = () => {
-        router.push(`../../Components/ArtClub/Cabinate`);
+        router.push(`../Components/DanceClub/Cabinate`);
     };
     const gotoArtLibrary = () => {
-        router.push(`../../Components/ArtClub/Library`);
+        router.push(`../Components/DanceClub/Library`);
     };
-    const gotoGallery = () => {
-        router.push(`./../Components/ArtClub/Gallery`);
-    };
-    const gotoContest = () => {
-        router.push(`../../Components/ArtClub/Contest`);
-    };
-     const gotoClubNews = () => {
-        router.push(`../../Components/ArtClub/ClubNews`);
+    const gotoClubNews = () => {
+        router.push(`../Components/DanceClub/ClubNews`);
     };
 
     return (
@@ -50,10 +40,10 @@ export default function Home() {
                         { icon: "globe", label: "Club Domain" },
                         { icon: "briefcase", label: "Club Affairs" },
                         { icon: "git-branch", label: "Club Chapters" },
-                        { icon: "newspaper", label: "Club News", Id: "ClubNews" },
+                        { icon: "newspaper", label: "Club News", id: "ClubNews"},
                         { icon: "award", label: "Hall of Fame" },
-                        { icon: "image", label: "Gallery", id: "Gallery"},
-                        { icon: "trophy", label: "Contests", id: "Contest" },
+                        { icon: "image", label: "Gallery" },
+                        { icon: "trophy", label: "Contests" },
                     ].map((item, index) => (
                         <Button onClick={() => {
                                 if(item.id == "Cabinet") {
@@ -61,12 +51,6 @@ export default function Home() {
                                 }
                                 if(item.id == "Library") {
                                     gotoArtLibrary()
-                                }
-                                if(item.id == "Gallery") {
-                                    gotoGallery()
-                                }
-                                if(item.id == "Contest") {
-                                    gotoContest()
                                 }
                                 if(item.id == "ClubNews") {
                                     gotoClubNews()
@@ -98,7 +82,7 @@ export default function Home() {
             <main className="flex-1">
                 {/* Header */}
                 <header className="flex justify-between items-center p-4 border-b">
-                    <h1 className="text-2xl font-bold">Art Club</h1>
+                    <h1 className="text-2xl font-bold">Dance Club</h1>
                     <div className="flex items-center gap-4">
                         <Button variant="ghost" size="icon">
                             <Search className="h-5 w-5" />
@@ -113,13 +97,13 @@ export default function Home() {
                 <section className="relative h-[300px] md:h-[400px]">
                     <Image
                         src="/placeholder.svg?height=400&width=800"
-                        alt="Art studio with paintings and easels"
+                        alt="Dance studio with paintings and easels"
                         fill
                         className="object-cover"
                         priority
                     />
                     <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-2">Welcome to Art Club</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-2">Welcome to Dance Club</h2>
                         <p className="text-lg md:text-xl">Where creativity meets passion</p>
                     </div>
                 </section>
@@ -128,11 +112,7 @@ export default function Home() {
                 <section className="p-6 md:p-10">
                     <h2 className="text-2xl font-bold mb-4">About Our Club</h2>
                     <p className="text-gray-700 mb-6">
-                        The Art Club is a vibrant community of creative individuals passionate about visual arts. Founded with the
-                        mission to foster artistic expression and cultural appreciation, we provide a platform for artists of all
-                        skill levels to explore, learn, and showcase their talents. Our club offers workshops, exhibitions,
-                        competitions, and collaborative projects that inspire creativity and build lasting connections within the
-                        artistic community.
+                       The Dance Club is a vibrant community of passionate dancers dedicated to the art of movement and rhythm. Founded with the mission to promote artistic expression through dance and celebrate diverse cultural styles, we provide a platform for performers of all skill levels to explore, learn, and showcase their dance talents. Our club organizes dance workshops, stage performances, competitions, and group choreographies that ignite creativity and foster strong bonds within the dance community.
                     </p>
 
                     {/* Tabs */}
