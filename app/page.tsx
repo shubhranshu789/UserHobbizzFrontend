@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import AllClubs from "./Components/AllClubs/page"
 import ArtCub from "./Components/ArtClub/page"
+import DanceClub from "./Components/DanceClub/page"
 
 
 export default function Page() {
@@ -25,7 +26,7 @@ export default function Page() {
       <button onClick={handleClick2}>Go to About</button> */}
 
 
-
+        {/* <DanceClub/> */}
       <ArtCub/>
     </div>
   );
