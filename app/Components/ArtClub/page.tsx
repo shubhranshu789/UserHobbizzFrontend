@@ -26,6 +26,9 @@ export default function Home() {
     const gotoGallery = () => {
         router.push(`./../Components/ArtClub/Gallery`);
     };
+    const gotoContest = () => {
+        router.push(`../../Components/ArtClub/Contest`);
+    };
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
@@ -47,7 +50,7 @@ export default function Home() {
                         { icon: "newspaper", label: "Club News" },
                         { icon: "award", label: "Hall of Fame" },
                         { icon: "image", label: "Gallery", id: "Gallery"},
-                        { icon: "trophy", label: "Contests" },
+                        { icon: "trophy", label: "Contests", id: "Contest" },
                     ].map((item, index) => (
                         <Button onClick={() => {
                                 if(item.id == "Cabinet") {
@@ -58,6 +61,9 @@ export default function Home() {
                                 }
                                 if(item.id == "Gallery") {
                                     gotoGallery()
+                                }
+                                if(item.id == "Contest") {
+                                    gotoContest()
                                 }
                              }} key={index} variant="ghost" className="w-full justify-start mb-1 font-normal">
                             <span className="mr-2" >
