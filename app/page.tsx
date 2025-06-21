@@ -4,11 +4,12 @@ import { useRouter } from 'next/navigation';
 import AllClubs from "./Components/AllClubs/page"
 import ArtCub from "./Components/ArtClub/page"
 import DanceClub from "./Components/DanceClub/page"
+import Auth from "./Components/Auth/page"
 
 
 export default function Page() {
   const router = useRouter();
-    const data = 20;
+  const data = 20;
   const str = "shubh"
 
   const handleClick = () => {
@@ -27,7 +28,7 @@ export default function Page() {
 
 
         {/* <DanceClub/> */}
-      <ArtCub/>
+      <Auth/>
     </div>
   );
 }
