@@ -79,7 +79,7 @@ function Page() {
       }
     }
 
-    fetch(`http://localhost:5000/getactivity/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/getactivity/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -107,7 +107,7 @@ function Page() {
 
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`http://localhost:5000/has-uploaded/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/has-uploaded/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -127,7 +127,7 @@ function Page() {
     const fetchParticipants = async () => {
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`http://localhost:5000/event-participants/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event-participants/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -152,7 +152,7 @@ function Page() {
     const fetchApprovedUploads = async () => {
       try {
         setLoadingApproved(true);
-        const res = await fetch(`http://localhost:5000/activity/approved-uploads/${event?._id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/activity/approved-uploads/${event?._id}`);
         const data = await res.json();
         setApprovedUploads(data.approvedUploads || []);
       } catch (error) {
@@ -188,7 +188,7 @@ function Page() {
 
   const registerForActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/register-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register-activity/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -214,7 +214,7 @@ function Page() {
 
   const unregisterFromActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/unregister-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/unregister-activity/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -270,7 +270,7 @@ function Page() {
 
       if (result.url) {
         const token = localStorage.getItem("jwt");
-        const response = await fetch(`http://localhost:5000/upload-photo/${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload-photo/${id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

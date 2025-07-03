@@ -60,7 +60,7 @@ const ClubNewsForm = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/danceClubNews", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/danceClubNews`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newsData),
@@ -92,7 +92,7 @@ const ClubNewsForm = () => {
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/danceClubNewsviewallpost");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/danceClubNewsviewallpost`);
       const data = await res.json();
 
       if (res.ok) {

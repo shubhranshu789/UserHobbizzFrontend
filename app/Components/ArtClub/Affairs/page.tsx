@@ -82,7 +82,7 @@ function ReviewActitvity() {
         //     return;
         // }
 
-        fetch("http://localhost:5000/allActivities", {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/allActivities`, {
             headers: {
                 // Authorization: "Bearer " + localStorage.getItem("jwt"),
             },
