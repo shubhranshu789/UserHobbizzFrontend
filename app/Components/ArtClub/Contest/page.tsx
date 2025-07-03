@@ -36,7 +36,7 @@ export default function CompetitionsPage() {
       setLoading(true)
       const response = await fetch("http://localhost:5000/allCompitition", {
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("jwt")
+          // "Authorization": "Bearer " + localStorage.getItem("jwt")
         },
       })
 

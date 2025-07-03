@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import ArtCub from "./Components/ArtClub/page"
 import DanceClub from "./Components/DanceClub/page"
 import Auth from "./Components/Auth/page"
+import WelcomePage from "../app/HobbizzWelcomePage/page"
 
 
 export default function Page() {
@@ -27,7 +28,9 @@ export default function Page() {
 
 
         {/* <DanceClub/> */}
-      <Auth/>
+      {/* <Auth/> */}
+
+      <WelcomePage/>
     </div>
   );
 }

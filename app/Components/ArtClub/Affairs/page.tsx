@@ -47,7 +47,7 @@ function ReviewActitvity() {
     const router = useRouter();
 
     const gotohome = () => {
-        router.push('../../../Components/home');
+        // router.push('../../../Components/home');
     };
 
     const [approvals, setApprovals] = useState({})
@@ -77,14 +77,14 @@ function ReviewActitvity() {
 
     useEffect(() => {
 
-        if (!(localStorage.getItem("jwt"))) {
-            gotohome();
-            return;
-        }
+        // if (!(localStorage.getItem("jwt"))) {
+        //     gotohome();
+        //     return;
+        // }
 
         fetch("http://localhost:5000/allActivities", {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("jwt"),
+                // Authorization: "Bearer " + localStorage.getItem("jwt"),
             },
         })
             .then((res) => res.json())

@@ -14,6 +14,8 @@ import { useEffect, useState } from "react"
 
 import Footer from "../../../Footer/page"
 
+import { useRouter } from 'next/navigation';
+
 type Activity = {
   _id: string;
   title: string;
@@ -40,6 +42,12 @@ function Page() {
   const [participants, setParticipants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openImage, setOpenImage] = useState(null);
+
+
+  const router = useRouter();
+  const gotoSignUp = () => {
+    router.push('/Components/Auth');
+  };
 
   useEffect(() => {
     const storedToken = localStorage.getItem("jwt");
@@ -141,7 +149,8 @@ function Page() {
         console.log("Activity:", data.activity);
         window.location.reload();
       } else {
-        alert(data.message || "Registration failed.");
+        alert(data.message || "You must login before participation.");
+        gotoSignUp();
       }
     } catch (error) {
       console.error("Registration error:", error);

@@ -262,9 +262,9 @@ export default function ArtClubNavbar() {
                                                     if (item.id == "Domain") {
                                                         router.push("/Components/ArtClub/CubDomain")
                                                     }
-                                                    if (item.id == "Affairs") {
-                                                        router.push("/Components/ArtClub/Cabinate")
-                                                    }
+                                                    // if (item.id == "Affairs") {
+                                                    //     router.push("/Components/ArtClub/Cabinate")
+                                                    // }
                                                     if (item.id == "Chapters") {
                                                         router.push("/Components/ArtClub/Cabinate")
                                                     }
@@ -378,9 +378,9 @@ export default function ArtClubNavbar() {
                                                     if (item.id == "Chapters") {
                                                         router.push("/Components/ArtClub/Cabinate")
                                                     }
-                                                    if (item.id == "Affairs") {
-                                                        router.push("/Components/ArtClub/Cabinate")
-                                                    }
+                                                    // if (item.id == "Affairs") {
+                                                    //     router.push("/Components/ArtClub/Cabinate")
+                                                    // }
                                                     if (item.id == "News") {
                                                         router.push("/Components/ArtClub/ClubNews")
                                                     }
