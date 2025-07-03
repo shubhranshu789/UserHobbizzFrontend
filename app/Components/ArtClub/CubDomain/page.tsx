@@ -10,17 +10,17 @@ import Navbar from "../Navbar/page"
 
 import Footer from "../../Footer/page";
 
-// import "../../../Components/ArtClub/ClubNews/ParticularArtNews"
+// import "../../../../Components/EDITOR/Activities/ArtNews/ParticularArtNews"
 
 interface NewsItem {
   _id: string;
   title: string;
   content: string;
-  category: string;
+  // category: string;
   author: string;
   imageUrl?: string;
-  tags: string[];
-  isFeatured: boolean;
+  // tags: string[];
+  // isFeatured: boolean;
   publishedAt: string;
 }
 
@@ -29,11 +29,11 @@ const ClubNewsForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    category: "Other",
+    // category: "Other",
     author: "",
     imageUrl: "",
-    tags: "",
-    isFeatured: false,
+    // tags: "",
+    // isFeatured: false,
   });
 
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
@@ -43,7 +43,7 @@ const ClubNewsForm = () => {
 
 
   const handleClickSubmitId = (id: any) => {
-   router.push(`/Components/ArtClub/ClubNews/ParticularArtNews?id=${id}`);
+    router.push(`/Components/EDITOR/Activities/ArtNews/ParticularArtNews?id=${id}`);
   };
 
 
@@ -65,18 +65,18 @@ const ClubNewsForm = () => {
     e.preventDefault();
 
     // Basic validation
-    if (!formData.title || !formData.content || !formData.category) {
+    if (!formData.title || !formData.content) {
       toast.error(" Please fill all required fields!");
       return;
     }
 
     const newsData = {
       ...formData,
-      tags: formData.tags.split(",").map((tag) => tag.trim()),
+      // tags: formData.tags.split(",").map((tag) => tag.trim()),
     };
 
     try {
-      const res = await fetch("http://localhost:5000/clubnews", {
+      const res = await fetch("http://localhost:5000/clubdomain", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newsData),
@@ -89,11 +89,11 @@ const ClubNewsForm = () => {
         setFormData({
           title: "",
           content: "",
-          category: "Other",
-          author: "Art Club Team",
+          // category: "Other",
+          author: "",
           imageUrl: "",
-          tags: "",
-          isFeatured: false,
+          // tags: "",
+          // isFeatured: false,
         });
         fetchNews(); // refresh after post
       } else {
@@ -108,7 +108,7 @@ const ClubNewsForm = () => {
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/clubnewsviewallpost");
+      const res = await fetch("http://localhost:5000/clubdomainviewallpost");
       const data = await res.json();
 
       if (res.ok) {
@@ -138,7 +138,7 @@ const ClubNewsForm = () => {
 
         {/* Content */}
         <h1 className="text-5xl font-extrabold text-gray-800 mb-3 drop-shadow-md z-10">
-          Art Club NEWS
+          Art Club Domains
         </h1>
         <p className="text-lg sm:text-xl text-gray-700 max-w-xl z-10">
           Stay updated with the latest announcements, achievements, and press coverage.
@@ -146,17 +146,17 @@ const ClubNewsForm = () => {
       </div>
 
       {/* Form Section */}
-      
+     
 
 
       {/* News Feed Section */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-       
+      
 
         {loading ? (
-          <p className="text-center text-gray-500">Loading news...</p>
+          <p className="text-center text-gray-500">Loading Domain...</p>
         ) : newsList.length === 0 ? (
-          <p className="text-center text-gray-500">No Journal found.</p>
+          <p className="text-center text-gray-500">No Domain found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {newsList.map((news) => (
@@ -165,15 +165,15 @@ const ClubNewsForm = () => {
                 className="relative group bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Featured Badge */}
-                {news.isFeatured && (
+                {/* {news.isFeatured && (
                   <div className="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
                     🌟 Featured
                   </div>
-                )}
+                )} */}
 
                 {/* Image Section */}
                 {news.imageUrl && (
-                  <div style={{cursor : "pointer"}} className="h-48 w-full overflow-hidden" onClick={() => {handleClickSubmitId(news._id)}}>
+                  <div className="h-48 w-full overflow-hidden" >
                     <img
                       src={news.imageUrl}
                       alt="News"
@@ -188,19 +188,30 @@ const ClubNewsForm = () => {
                     {news.title}
                   </h3>
 
-                  <p className="text-sm text-gray-500 mb-1">
+                  {/* <p className="text-sm text-gray-500 mb-1">
                     <strong>Category:</strong> {news.category}
-                  </p>
-                  <p className="text-sm text-gray-500 mb-1">
-                    <strong>Author:</strong> {news.author}
-                  </p>
+                  </p> */}
 
                   <p className="text-gray-700 text-sm mt-2 mb-4 line-clamp-3">
                     {news.content}
                   </p>
 
+
+                  <a 
+                    href={news.author}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-sm text-blue-600 hover:text-blue-800 font-medium hover:underline"
+                    style={{marginBottom : "20px"}}
+                  >
+                    Learn More
+                  </a>
+
+
+
+
                   {/* Tags */}
-                  {news.tags?.length > 0 && (
+                  {/* {news.tags?.length > 0 && (
                     <div className="mb-4">
                       {news.tags.map((tag, index) => (
                         <span
@@ -211,7 +222,7 @@ const ClubNewsForm = () => {
                         </span>
                       ))}
                     </div>
-                  )}
+                  )} */}
 
                   <div className="mt-auto text-xs text-gray-400">
                     🕒 {new Date(news.publishedAt).toLocaleString()}
@@ -225,7 +236,7 @@ const ClubNewsForm = () => {
 
       <div>
         {/* Footer */}
-        <Footer/>
+        <Footer />
       </div>
 
       <ToastContainer position="top-center" autoClose={2000} />

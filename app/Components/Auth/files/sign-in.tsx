@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-// import "../../../Components/home"
+// import "../../../Components/ArtClub/home"
 
 
 
@@ -59,7 +59,7 @@ export default function SignIn() {
 
 
   const GotoDashBoard = () => {
-    router.push('/Components/home');
+    router.push('/Components/ArtClub/home');
   }
 
 

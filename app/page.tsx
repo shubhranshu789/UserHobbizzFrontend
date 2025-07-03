@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import AllClubs from "./Components/AllClubs/page"
 import ArtCub from "./Components/ArtClub/page"
 import DanceClub from "./Components/DanceClub/page"
 import Auth from "./Components/Auth/page"

@@ -12,6 +12,7 @@ const nextConfig = {
         'rinewstoday.com',
         'blogger.googleusercontent.com',
         'media.architecturaldigest.com',
+        'res.cloudinary.com', 'res-console.cloudinary.com'
 
 
 
@@ -21,3 +22,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+

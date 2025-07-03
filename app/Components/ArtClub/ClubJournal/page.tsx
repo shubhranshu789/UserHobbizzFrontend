@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useRouter } from 'next/navigation';
-
 import Navbar from "../Navbar/page"
 
 import Footer from "../../Footer/page";
+import { useRouter } from 'next/navigation';
 
-// import "../../../Components/ArtClub/ClubNews/ParticularArtNews"
+
+// import "../../../Components/ArtClub/ClubJournal/ParticularArtJournal"
 
 interface NewsItem {
   _id: string;
@@ -35,18 +35,16 @@ const ClubNewsForm = () => {
     tags: "",
     isFeatured: false,
   });
-
-  const [newsList, setNewsList] = useState<NewsItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const router = useRouter();
 
 
   const handleClickSubmitId = (id: any) => {
-   router.push(`/Components/ArtClub/ClubNews/ParticularArtNews?id=${id}`);
+    router.push(`/Components/ArtClub/ClubJournal/ParticularArtJournal?id=${id}`);
   };
 
 
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // Input Change Handler
   const handleChange = (
@@ -76,7 +74,7 @@ const ClubNewsForm = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/clubnews", {
+      const res = await fetch("http://localhost:5000/clubjournal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newsData),
@@ -108,7 +106,7 @@ const ClubNewsForm = () => {
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/clubnewsviewallpost");
+      const res = await fetch("http://localhost:5000/clubjpurnalviewallpost");
       const data = await res.json();
 
       if (res.ok) {
@@ -138,7 +136,7 @@ const ClubNewsForm = () => {
 
         {/* Content */}
         <h1 className="text-5xl font-extrabold text-gray-800 mb-3 drop-shadow-md z-10">
-          Art Club NEWS
+          Art Club Journal
         </h1>
         <p className="text-lg sm:text-xl text-gray-700 max-w-xl z-10">
           Stay updated with the latest announcements, achievements, and press coverage.
@@ -146,12 +144,15 @@ const ClubNewsForm = () => {
       </div>
 
       {/* Form Section */}
-      
 
+
+      {/* <hr style={{ margin: "40px 0" }} /> */}
 
       {/* News Feed Section */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-       
+        {/* <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+          🗞️ Club Journal
+        </h2> */}
 
         {loading ? (
           <p className="text-center text-gray-500">Loading news...</p>
@@ -173,8 +174,9 @@ const ClubNewsForm = () => {
 
                 {/* Image Section */}
                 {news.imageUrl && (
-                  <div style={{cursor : "pointer"}} className="h-48 w-full overflow-hidden" onClick={() => {handleClickSubmitId(news._id)}}>
+                  <div className="h-48 w-full overflow-hidden">
                     <img
+                      onClick={() => {handleClickSubmitId(news._id)}}
                       src={news.imageUrl}
                       alt="News"
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -225,7 +227,7 @@ const ClubNewsForm = () => {
 
       <div>
         {/* Footer */}
-        <Footer/>
+        <Footer />
       </div>
 
       <ToastContainer position="top-center" autoClose={2000} />
