@@ -80,7 +80,7 @@ const LocalEventsDisplayPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 ">
       <Navbar />
       <div className="max-w-6xl mt-6 mx-auto">
         {/* Header */}
@@ -154,7 +154,7 @@ const LocalEventsDisplayPage = () => {
                     <MapPin className="w-4 h-4" />
                     <span className="text-sm">Venue: {event.venue}</span>
                   </div>
-                  <Link href={`/Components/DISTRICT/LocalEventOverview?event_id=${encodeURIComponent(event.event_id)}`}>
+                  <Link href={`/Components/ArtClub/LocalEvents/Overview?event_id=${encodeURIComponent(event.event_id)}`}>
                     <Button
                       className={`w-full ${
                         isPast
