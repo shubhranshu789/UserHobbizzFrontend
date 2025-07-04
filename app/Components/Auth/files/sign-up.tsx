@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { motion } from "framer-motion"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { User, Mail, Lock, Eye, EyeOff, MapPin, Building, GraduationCap } from "lucide-react"
 import { toast } from "react-hot-toast"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 
 // import "../../../Components/Auth/files/SignIn"
@@ -447,10 +447,18 @@ const statesAndDistricts = {
   ],
 }
 
-export default function CompleteRegistrationForm() {
+
+function CompleteRegistrationForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+
+
   // const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [formData, setFormData] = useState({
     fullName: "",
@@ -460,11 +468,18 @@ export default function CompleteRegistrationForm() {
     state: "",
     district: "",
     school: "",
+    club: ""
   })
 
   const [ip, setIp] = useState("")
 
-  const router = useRouter();
+  useEffect(() => {
+    if (id) {
+      setFormData((prev) => ({ ...prev, club: id }));
+    }
+  }, [id]);
+
+
 
 
 
@@ -564,7 +579,7 @@ export default function CompleteRegistrationForm() {
   }
 
   return (
-    <div style={{background : "#2577ff"}} className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div style={{ background: "#2577ff" }} className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">Create Account</h1>
 
@@ -812,15 +827,31 @@ export default function CompleteRegistrationForm() {
         >
           <p className="text-sm text-gray-600">
             Already have an account?
-            <span 
-            onClick={() => { router.push("/Components/Auth/files/SignIn") }} 
-            style={{ cursor: 'pointer' }} className="text-blue-600 hover:text-blue-700 font-medium">
+            <span
+              onClick={() => { router.push("/Components/Auth/files/SignIn") }}
+              style={{ cursor: 'pointer' }} className="text-blue-600 hover:text-blue-700 font-medium">
               Sign in
             </span>
-            
+
           </p>
         </motion.div>
+
+
+{/* 
+        <div>
+          <p>Selected Club: {formData.club}</p>
+        </div> */}
       </div>
     </div>
   )
+}
+
+
+
+export default function WrappedPage() {
+  return (
+    <Suspense>
+      <CompleteRegistrationForm />
+    </Suspense>
+  );
 }

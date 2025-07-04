@@ -64,7 +64,7 @@ export default function ArtClubHomepage() {
   const router = useRouter();
 
   const GotoSignUp = () => {
-    router.push(`/Components/Auth`);
+    router.push(`/Components/Auth?id=${encodeURIComponent("Art Club")}`);
   };
 
   useEffect(() => {

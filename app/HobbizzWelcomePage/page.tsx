@@ -30,7 +30,7 @@ export default function HomePage() {
   };
 
   const ArtPageWelcome = () => {
-    router.push('/Components/ArtClub/home');
+    router.push(`/Components/ArtClub/home?id=${encodeURIComponent("Art Club")}`);
   };
 
   const CraftPageWelcome = () => {
