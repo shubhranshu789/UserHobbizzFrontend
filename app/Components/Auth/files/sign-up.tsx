@@ -533,6 +533,7 @@ function CompleteRegistrationForm() {
       formData.state,
       formData.district,
       formData.school,
+      
     )
 
     try {
@@ -549,6 +550,7 @@ function CompleteRegistrationForm() {
           state: formData.state,
           district: formData.district,
           school: formData.school,
+          club: formData.club,
         }),
       })
 
@@ -560,10 +562,11 @@ function CompleteRegistrationForm() {
         toast.success(data.message || "Signup success!")
         // handleClick1(); // Uncomment if you have this function
         // navigate('/signin') // Uncomment if you have navigation
+        router.push("/Components/Auth/files/SignIn")
+
       }
 
       console.log(data)
-      router.push("/Components/Auth/files/SignIn")
 
     } catch (error) {
       console.error("Network error:", error)

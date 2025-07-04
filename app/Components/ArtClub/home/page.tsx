@@ -462,7 +462,7 @@ export default function ArtClubHomepage() {
       </section>
 
       {/* Gallery Preview */}
-      <section
+      {/* <section
         className={`py-20 px-4 sm:px-6 lg:px-8 bg-white transition-all duration-1000 ${visibleSections.has("gallery-section") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
         id="gallery-section"
         data-animate
@@ -534,7 +534,7 @@ export default function ArtClubHomepage() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Upcoming Events */}
    
