@@ -195,7 +195,7 @@ export default function ArtClubNavbar() {
                                             router.push("/Components/ArtClub/CubDomain")
                                         }
                                         if (item.id == "Chapters") {
-                                            // router.push("/Components/ArtClub/Cabinate")
+                                            router.push("/Components/ArtClub/LocalEvents/Events")
                                         }
                                         if (item.id == "Affairs") {
                                             router.push("/Components/ArtClub/Affairs")
@@ -266,7 +266,7 @@ export default function ArtClubNavbar() {
                                                         router.push("/Components/ArtClub/Cabinate")
                                                     }
                                                     if (item.id == "Chapters") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/Components/ArtClub/LocalEvents/Events")
                                                     }
                                                     if (item.id == "Affairs") {
                                                         router.push("/Components/ArtClub/Affairs")
@@ -376,7 +376,7 @@ export default function ArtClubNavbar() {
                                                         router.push("/Components/ArtClub/Affairs")
                                                     }
                                                     if (item.id == "Chapters") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/Components/ArtClub/LocalEvents/Events")
                                                     }
                                                     if (item.id == "Affairs") {
                                                         router.push("/Components/ArtClub/Cabinate")
