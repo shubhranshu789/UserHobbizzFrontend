@@ -171,7 +171,7 @@ export default function ArtClubNavbar() {
 
                                     onClick={() => {
                                         if (item.id == "Cabinet") {
-                                            router.push("/Components/ArtClub/Cabinate")
+                                            router.push("/Components/ArtClub/Cabinate/cabinate")
                                         }
                                         if (item.id == "Constitution") {
                                             router.push("/Components/ArtClub/ClubConstitution")
@@ -239,7 +239,7 @@ export default function ArtClubNavbar() {
 
                                                 onClick={() => {
                                                     if (item.id == "Cabinet") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/Components/ArtClub/Cabinate/cabinate")
                                                     }
                                                     if (item.id == "Constitution") {
                                                         router.push("/Components/ArtClub/ClubConstitution")
@@ -349,7 +349,7 @@ export default function ArtClubNavbar() {
 
                                                     setIsMenuOpen(false)
                                                     if (item.id == "Cabinet") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/Components/ArtClub/Cabinate/cabinate")
                                                     }
                                                     if (item.id == "Constitution") {
                                                         router.push("/Components/ArtClub/ClubConstitution")
