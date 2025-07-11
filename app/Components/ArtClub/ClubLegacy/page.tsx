@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 
 
 // import "../../../../Components/EDITOR/Activities/AddLEGACY/ViewParticularHeritage"
+// import "../../../Components/ArtClub/ClubLegacy/ViewParticularHeritage"
 
 interface HallOfFameItem {
     _id: string;
@@ -84,7 +85,7 @@ const HallOfFameForm = () => {
     };
 
     const handleClickSubmitId = (id: any) => {
-        router.push(`/Components/EDITOR/Activities/AddLEGACY/ViewParticularHeritage?id=${id}`);
+        router.push(`/Components/ArtClub/ClubLegacy/ViewParticularHeritage?id=${id}`);
     };
 
     useEffect(() => {
