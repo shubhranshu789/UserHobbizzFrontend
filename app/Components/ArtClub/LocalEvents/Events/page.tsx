@@ -12,11 +12,11 @@ import ShareButton from "../ShareButton";
 interface Event {
   event_id: string;
   title: string;
+  image:string;
   date: string;
   venue: string;
   description?: string;
   status: string;
-  image?: string;
 }
 
 const LocalEventsDisplayPage = () => {

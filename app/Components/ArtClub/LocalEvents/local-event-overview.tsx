@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { CalendarDays, MapPin, Clock, Globe, Building, Users } from "lucide-react"
 import Navbar from "../Navbar/page"
@@ -12,6 +13,7 @@ import ShareButton from "./ShareButton"
 interface Event {
   event_id: string
   title: string
+  image:string
   date: string
   venue: string
   description?: string
@@ -155,14 +157,13 @@ function LocalEventOverviewContent() {
       <div className="min-h-screen mt-16 bg-gray-50">
         {/* Header with Gradient */}
         <div className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 py-12">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">{event.title}</h1>
-              <p className="text-xl md:text-2xl opacity-90">
-                {event.description || "Join this exciting local event and showcase your talent."}
-              </p>
-            </div>
-          </div>
+          <Image
+            src={event.image}
+            alt={event.title}
+            width={1920}
+            height={400}
+            className="w-full h-64 object-cover" 
+          />
         </div>
 
         {/* Navigation Tabs */}
