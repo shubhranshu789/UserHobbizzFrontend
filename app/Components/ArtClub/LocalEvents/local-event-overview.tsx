@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
+import Head from "next/head"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
@@ -53,7 +54,7 @@ function LocalEventOverviewContent() {
         setError(null)
 
         const response = await fetch(
-          `http://localhost:5000/event-details?event_id=${encodeURIComponent(event_id)}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/event-details?event_id=${encodeURIComponent(event_id)}`,
         )
 
         if (!response.ok) {
@@ -153,6 +154,24 @@ function LocalEventOverviewContent() {
 
   return (
     <div>
+      <Head>
+        <title>{event.title} - Local Event</title>
+        <meta name="description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}. ${event.description || 'An exciting local community event.'}`} />
+        
+        {/* Open Graph Meta Tags for Facebook */}
+        <meta property="og:title" content={event.title} />
+        <meta property="og:description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}. ${event.description || 'An exciting local community event.'}`} />
+        <meta property="og:image" content={event.image} />
+        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/Components/ArtClub/LocalEvents/Overview?event_id=${encodeURIComponent(event.event_id)}`} />
+        <meta property="og:type" content="event" />
+        <meta property="og:site_name" content="Hobbizz" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={event.title} />
+        <meta name="twitter:description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}`} />
+        <meta name="twitter:image" content={event.image} />
+      </Head>
       <Navbar />
       <div className="min-h-screen mt-16 bg-gray-50">
         {/* Header with Gradient */}
@@ -216,6 +235,7 @@ function LocalEventOverviewContent() {
                     eventDate={prettyDate}
                     eventVenue={event.venue}
                     eventId={event.event_id}
+                    eventImage={event.image}
                     size="lg"
                   />
                 </div>

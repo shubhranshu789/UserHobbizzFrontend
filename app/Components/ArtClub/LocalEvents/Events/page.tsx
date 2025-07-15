@@ -36,7 +36,7 @@ const LocalEventsDisplayPage = () => {
     setIsLoading(true);
     setError(null);
     fetch(
-      `http://localhost:5000/get-events?club=${userData.club}&district=${userData.district}`
+      `${process.env.NEXT_PUBLIC_API_URL}/get-events?club=${userData.club}&district=${userData.district}`
     )
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
@@ -157,6 +157,7 @@ const LocalEventsDisplayPage = () => {
                       eventDate={prettyDate}
                       eventVenue={event.venue}
                       eventId={event.event_id}
+                      eventImage={event.image}
                       size="sm"
                     />
                   </div>
