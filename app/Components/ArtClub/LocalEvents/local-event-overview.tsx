@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { CalendarDays, MapPin, Clock, Globe, Building, Users } from "lucide-react"
 import Navbar from "../Navbar/page"
+import ShareButton from "./ShareButton"
 
 interface Event {
   event_id: string
@@ -50,7 +51,7 @@ function LocalEventOverviewContent() {
         setError(null)
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/event-details?event_id=${encodeURIComponent(event_id)}`,
+          `http://localhost:5000/event-details?event_id=${encodeURIComponent(event_id)}`,
         )
 
         if (!response.ok) {
@@ -199,15 +200,24 @@ function LocalEventOverviewContent() {
                 <p className="text-xl text-gray-600 mb-6">
                   {event.description || "Join this amazing local event and be part of the community."}
                 </p>
-                <Button
-                  size="lg"
-                  className={`px-8 py-3 transition-colors ${
-                    isPast ? "bg-gray-400 hover:bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-                  }`}
-                  disabled={isPast}
-                >
-                  {isPast ? "Event Ended" : "Register for Event"}
-                </Button>
+                <div className="flex items-center gap-4">
+                  <Button
+                    size="lg"
+                    className={`px-8 py-3 transition-colors ${
+                      isPast ? "bg-gray-400 hover:bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+                    }`}
+                    disabled={isPast}
+                  >
+                    {isPast ? "Event Ended" : "Register for Event"}
+                  </Button>
+                  <ShareButton
+                    eventTitle={event.title}
+                    eventDate={prettyDate}
+                    eventVenue={event.venue}
+                    eventId={event.event_id}
+                    size="lg"
+                  />
+                </div>
               </div>
 
               {/* Event Information */}

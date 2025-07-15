@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { CalendarDays, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../../Navbar/page"
+import Navbar from "../../Navbar/page";
+import ShareButton from "../ShareButton";
 
 interface Event {
   event_id: string;
@@ -35,7 +36,7 @@ const LocalEventsDisplayPage = () => {
     setIsLoading(true);
     setError(null);
     fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/get-events?club=${userData.club}&district=${userData.district}`
+      `http://localhost:5000/get-events?club=${userData.club}&district=${userData.district}`
     )
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
@@ -147,9 +148,18 @@ const LocalEventsDisplayPage = () => {
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {event.title}
-                  </h3>
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900 flex-1 mr-2">
+                      {event.title}
+                    </h3>
+                    <ShareButton
+                      eventTitle={event.title}
+                      eventDate={prettyDate}
+                      eventVenue={event.venue}
+                      eventId={event.event_id}
+                      size="sm"
+                    />
+                  </div>
                   <div className="flex items-center gap-2 text-gray-600 mb-4">
                     <MapPin className="w-4 h-4" />
                     <span className="text-sm">Venue: {event.venue}</span>

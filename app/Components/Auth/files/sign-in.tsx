@@ -67,7 +67,7 @@ export default function SignIn() {
 
 
         //sending data to server
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
+        fetch(`http://localhost:5000/signin`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
