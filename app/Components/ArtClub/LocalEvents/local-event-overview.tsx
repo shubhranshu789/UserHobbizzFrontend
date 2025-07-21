@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
+import Head from "next/head"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { CalendarDays, MapPin, Clock, Globe, Building, Users } from "lucide-react"
 import Navbar from "../Navbar/page"
+import ShareButton from "./ShareButton"
 
 interface Event {
   event_id: string
   title: string
+  image:string
   date: string
   venue: string
   description?: string
@@ -150,18 +154,35 @@ function LocalEventOverviewContent() {
 
   return (
     <div>
+      <Head>
+        <title>{event.title} - Local Event</title>
+        <meta name="description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}. ${event.description || 'An exciting local community event.'}`} />
+        
+        {/* Open Graph Meta Tags for Facebook */}
+        <meta property="og:title" content={event.title} />
+        <meta property="og:description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}. ${event.description || 'An exciting local community event.'}`} />
+        <meta property="og:image" content={event.image} />
+        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/Components/ArtClub/LocalEvents/Overview?event_id=${encodeURIComponent(event.event_id)}`} />
+        <meta property="og:type" content="event" />
+        <meta property="og:site_name" content="Hobbizz" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={event.title} />
+        <meta name="twitter:description" content={`Join us for ${event.title} on ${prettyDate} at ${event.venue}`} />
+        <meta name="twitter:image" content={event.image} />
+      </Head>
       <Navbar />
       <div className="min-h-screen mt-16 bg-gray-50">
         {/* Header with Gradient */}
         <div className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 py-12">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">{event.title}</h1>
-              <p className="text-xl md:text-2xl opacity-90">
-                {event.description || "Join this exciting local event and showcase your talent."}
-              </p>
-            </div>
-          </div>
+          <Image
+            src={event.image}
+            alt={event.title}
+            width={1920}
+            height={400}
+            className="w-full h-64 object-cover" 
+          />
         </div>
 
         {/* Navigation Tabs */}
@@ -199,15 +220,25 @@ function LocalEventOverviewContent() {
                 <p className="text-xl text-gray-600 mb-6">
                   {event.description || "Join this amazing local event and be part of the community."}
                 </p>
-                <Button
-                  size="lg"
-                  className={`px-8 py-3 transition-colors ${
-                    isPast ? "bg-gray-400 hover:bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-                  }`}
-                  disabled={isPast}
-                >
-                  {isPast ? "Event Ended" : "Register for Event"}
-                </Button>
+                <div className="flex items-center gap-4">
+                  <Button
+                    size="lg"
+                    className={`px-8 py-3 transition-colors ${
+                      isPast ? "bg-gray-400 hover:bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+                    }`}
+                    disabled={isPast}
+                  >
+                    {isPast ? "Event Ended" : "Register for Event"}
+                  </Button>
+                  <ShareButton
+                    eventTitle={event.title}
+                    eventDate={prettyDate}
+                    eventVenue={event.venue}
+                    eventId={event.event_id}
+                    eventImage={event.image}
+                    size="lg"
+                  />
+                </div>
               </div>
 
               {/* Event Information */}
