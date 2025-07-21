@@ -69,24 +69,24 @@ export default function ArtClubHomepage() {
   const router = useRouter();
 
   const GotoSignUp = () => {
-    router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
+    router.push(`/CraftClub/Auth?id=${encodeURIComponent("craftclub")}`);
   };
 
 
   const gotoHeritage = () => {
-    router.push(`/Components/ArtClub/Heritage`)
+    router.push(`/CraftClub/ArtClub/Heritage`)
   }
   const gotoGallery = () => {
-    router.push(`/Components/ArtClub/Gallery`)
+    router.push(`/CraftClub/ArtClub/Gallery`)
   }
   const gotoAffairs = () => {
-    router.push(`/Components/ArtClub/Affairs`)
+    router.push(`/CraftClub/ArtClub/Affairs`)
   }
   const gotoContest = () => {
-    router.push(`/Components/ArtClub/Contest`)
+    router.push(`/CraftClub/ArtClub/Contest`)
   }
   const gotoHallOfFame = () => {
-    router.push(`/Components/ArtClub/HallOfFame`)
+    router.push(`/CraftClub/ArtClub/HallOfFame`)
   }
 
 

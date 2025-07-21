@@ -64,7 +64,7 @@ function Page() {
   // };
 
   const gotoSignUp = () => {
-    router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
+    router.push(`/CraftClub/Auth?id=${encodeURIComponent("craftclub")}`);
   };
 
 
@@ -86,7 +86,7 @@ function Page() {
       }
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/getactivity/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftgetactivity/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -114,7 +114,7 @@ function Page() {
 
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/has-uploaded/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/crafthas-uploaded/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -134,7 +134,7 @@ function Page() {
     const fetchParticipants = async () => {
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event-participants/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftevent-participants/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -159,7 +159,7 @@ function Page() {
     const fetchApprovedUploads = async () => {
       try {
         setLoadingApproved(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/activity/approved-uploads/${event?._id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftactivity/approved-uploads/${event?._id}`);
         const data = await res.json();
         setApprovedUploads(data.approvedUploads || []);
       } catch (error) {
@@ -195,7 +195,7 @@ function Page() {
 
   const registerForActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftregister-activity/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -221,7 +221,7 @@ function Page() {
 
   const unregisterFromActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/unregister-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftunregister-activity/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -277,7 +277,7 @@ function Page() {
 
       if (result.url) {
         const token = localStorage.getItem("jwt");
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload-photo/${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftupload-photo/${id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -343,10 +343,10 @@ function Page() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 
-                  <div className="flex items-center gap-2">
+                  {/* <div className="flex items-center gap-2">
                     <User className="h-5 w-5 text-muted-foreground" />
                     <span>Posted by: {event?.postedBy[0].substring(0, 8)}...</span>
-                  </div>
+                  </div> */}
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-muted-foreground" />
                     <span>{event?.Registrations.length} Registrations</span>

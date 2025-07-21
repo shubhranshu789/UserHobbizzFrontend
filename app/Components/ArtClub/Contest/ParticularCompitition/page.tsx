@@ -45,9 +45,14 @@ function Page() {
 
 
   const router = useRouter();
-  const gotoSignUp = () => {
-    router.push('/Components/Auth');
+  // const gotoSignUp = () => {
+  //   router.push('/Components/Auth');
+  // };
+
+    const gotoSignUp = () => {
+    router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
   };
+
 
   useEffect(() => {
     const storedToken = localStorage.getItem("jwt");

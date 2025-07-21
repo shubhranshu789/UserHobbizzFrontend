@@ -180,50 +180,50 @@ export default function ArtClubNavbar() {
 
                                     onClick={() => {
                                         if (item.id == "Cabinet") {
-                                            router.push("/Components/ArtClub/Cabinate/cabinate")
+                                            router.push("/CraftClub/ArtClub/Cabinate/cabinate")
                                         }
                                         if (item.id == "Constitution") {
-                                            router.push("/Components/ArtClub/ClubConstitution")
+                                            router.push("/CraftClub/ArtClub/ClubConstitution")
                                         }
                                         if (item.id == "Legacy") {
-                                            router.push("/Components/ArtClub/ClubLegacy")
+                                            router.push("/CraftClub/ArtClub/ClubLegacy")
                                         }
                                         if (item.id == "Heritage") {
-                                            router.push("/Components/ArtClub/Heritage")
+                                            router.push("/CraftClub/ArtClub/Heritage")
                                         }
                                         if (item.id == "Calendar") {
-                                            router.push("/Components/ArtClub/Calendar")
+                                            router.push("/CraftClub/ArtClub/Calendar")
                                         }
                                         if (item.id == "Library") {
-                                            // router.push("/Components/ArtClub/Cabinate")
+                                            // router.push("/CraftClub/ArtClub/Cabinate")
                                         }
                                         if (item.id == "Journal") {
-                                            router.push("/Components/ArtClub/ClubJournal")
+                                            router.push("/CraftClub/ArtClub/ClubJournal")
                                         }
                                         if (item.id == "Domain") {
-                                            router.push("/Components/ArtClub/CubDomain")
+                                            router.push("/CraftClub/ArtClub/CubDomain")
                                         }
                                         if (item.id == "Chapters") {
-                                            router.push("/Components/ArtClub/LocalEvents/Events")
+                                            router.push("/CraftClub/ArtClub/LocalEvents/Events")
                                         }
                                         if (item.id == "Affairs") {
-                                            router.push("/Components/ArtClub/Affairs")
+                                            router.push("/CraftClub/ArtClub/Affairs")
                                         }
                                         if (item.id == "News") {
-                                            router.push("/Components/ArtClub/ClubNews")
+                                            router.push("/CraftClub/ArtClub/ClubNews")
                                         }
                                         if (item.id == "Fame") {
-                                            router.push("/Components/ArtClub/HallOfFame")
+                                            router.push("/CraftClub/ArtClub/HallOfFame")
                                         }
                                         if (item.id == "Gallery") {
-                                            router.push("/Components/ArtClub/Gallery")
+                                            router.push("/CraftClub/ArtClub/Gallery")
                                         }
                                         if (item.id == "Contests") {
-                                            router.push("/Components/ArtClub/Contest")
+                                            router.push("/CraftClub/ArtClub/Contest")
                                         }
                                         if (item.id == "Logout") {
                                             localStorage.clear()
-                                            router.push("/Components/Auth/files/SignIn")
+                                            router.push("/CraftClub/Auth/files/SignIn")
                                         }
 
                                     }}
@@ -248,53 +248,53 @@ export default function ArtClubNavbar() {
 
                                                 onClick={() => {
                                                     if (item.id == "Cabinet") {
-                                                        router.push("/Components/ArtClub/Cabinate/cabinate")
+                                                        router.push("/CraftClub/ArtClub/Cabinate/cabinate")
                                                     }
                                                     if (item.id == "Constitution") {
-                                                        router.push("/Components/ArtClub/ClubConstitution")
+                                                        router.push("/CraftClub/ArtClub/ClubConstitution")
                                                     }
                                                     if (item.id == "Legacy") {
-                                                        router.push("/Components/ArtClub/ClubLegacy")
+                                                        router.push("/CraftClub/ArtClub/ClubLegacy")
                                                     }
                                                     if (item.id == "Heritage") {
-                                                        router.push("/Components/ArtClub/Heritage")
+                                                        router.push("/CraftClub/ArtClub/Heritage")
                                                     }
                                                     if (item.id == "Calendar") {
-                                                        router.push("/Components/ArtClub/Calendar")
+                                                        router.push("/CraftClub/ArtClub/Calendar")
                                                     }
                                                     if (item.id == "Library") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/CraftClub/ArtClub/Cabinate")
                                                     }
                                                     if (item.id == "Journal") {
-                                                        router.push("/Components/ArtClub/ClubJournal")
+                                                        router.push("/CraftClub/ArtClub/ClubJournal")
                                                     }
                                                     if (item.id == "Domain") {
-                                                        router.push("/Components/ArtClub/CubDomain")
+                                                        router.push("/CraftClub/ArtClub/CubDomain")
                                                     }
                                                     // if (item.id == "Affairs") {
-                                                    //     router.push("/Components/ArtClub/Cabinate")
+                                                    //     router.push("/CraftClub/ArtClub/Cabinate")
                                                     // }
                                                     if (item.id == "Chapters") {
-                                                        router.push("/Components/ArtClub/LocalEvents/Events")
+                                                        router.push("/CraftClub/ArtClub/LocalEvents/Events")
                                                     }
                                                     if (item.id == "Affairs") {
-                                                        router.push("/Components/ArtClub/Affairs")
+                                                        router.push("/CraftClub/ArtClub/Affairs")
                                                     }
                                                     if (item.id == "News") {
-                                                        router.push("/Components/ArtClub/ClubNews")
+                                                        router.push("/CraftClub/ArtClub/ClubNews")
                                                     }
                                                     if (item.id == "Fame") {
-                                                        router.push("/Components/ArtClub/HallOfFame")
+                                                        router.push("/CraftClub/ArtClub/HallOfFame")
                                                     }
                                                     if (item.id == "Gallery") {
-                                                        router.push("/Components/ArtClub/Gallery")
+                                                        router.push("/CraftClub/ArtClub/Gallery")
                                                     }
                                                     if (item.id == "Contests") {
-                                                        router.push("/Components/ArtClub/Contest")
+                                                        router.push("/CraftClub/ArtClub/Contest")
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/Components/Auth/files/SignIn")
+                                                        router.push("/CraftClub/Auth/files/SignIn")
                                                     }
 
                                                 }}
@@ -360,53 +360,53 @@ export default function ArtClubNavbar() {
 
                                                     setIsMenuOpen(false)
                                                     if (item.id == "Cabinet") {
-                                                        router.push("/Components/ArtClub/Cabinate/cabinate")
+                                                        router.push("/CraftClub/ArtClub/Cabinate/cabinate")
                                                     }
                                                     if (item.id == "Constitution") {
-                                                        router.push("/Components/ArtClub/ClubConstitution")
+                                                        router.push("/CraftClub/ArtClub/ClubConstitution")
                                                     }
                                                     if (item.id == "Legacy") {
-                                                        router.push("/Components/ArtClub/ClubLegacy")
+                                                        router.push("/CraftClub/ArtClub/ClubLegacy")
                                                     }
                                                     if (item.id == "Heritage") {
-                                                        router.push("/Components/ArtClub/Heritage")
+                                                        router.push("/CraftClub/ArtClub/Heritage")
                                                     }
                                                     if (item.id == "Calendar") {
-                                                        router.push("/Components/ArtClub/Calendar")
+                                                        router.push("/CraftClub/ArtClub/Calendar")
                                                     }
                                                     if (item.id == "Library") {
-                                                        router.push("/Components/ArtClub/Cabinate")
+                                                        router.push("/CraftClub/ArtClub/Cabinate")
                                                     }
                                                     if (item.id == "Journal") {
-                                                        router.push("/Components/ArtClub/ClubJournal")
+                                                        router.push("/CraftClub/ArtClub/ClubJournal")
                                                     }
                                                     if (item.id == "Domain") {
-                                                        router.push("/Components/ArtClub/CubDomain")
+                                                        router.push("/CraftClub/ArtClub/CubDomain")
                                                     }
                                                     if (item.id == "Affairs") {
-                                                        router.push("/Components/ArtClub/Affairs")
+                                                        router.push("/CraftClub/ArtClub/Affairs")
                                                     }
                                                     if (item.id == "Chapters") {
-                                                        router.push("/Components/ArtClub/LocalEvents/Events")
+                                                        router.push("/CraftClub/ArtClub/LocalEvents/Events")
                                                     }
                                                     // if (item.id == "Affairs") {
-                                                    //     router.push("/Components/ArtClub/Cabinate")
+                                                    //     router.push("/CraftClub/ArtClub/Cabinate")
                                                     // }
                                                     if (item.id == "News") {
-                                                        router.push("/Components/ArtClub/ClubNews")
+                                                        router.push("/CraftClub/ArtClub/ClubNews")
                                                     }
                                                     if (item.id == "Fame") {
-                                                        router.push("/Components/ArtClub/HallOfFame")
+                                                        router.push("/CraftClub/ArtClub/HallOfFame")
                                                     }
                                                     if (item.id == "Gallery") {
-                                                        router.push("/Components/ArtClub/Gallery")
+                                                        router.push("/CraftClub/ArtClub/Gallery")
                                                     }
                                                     if (item.id == "Contests") {
-                                                        router.push("/Components/ArtClub/Contest")
+                                                        router.push("/CraftClub/ArtClub/Contest")
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/Components/Auth/files/SignIn")
+                                                        router.push("/CraftClub/Auth/files/SignIn")
                                                     }
 
                                                 }}

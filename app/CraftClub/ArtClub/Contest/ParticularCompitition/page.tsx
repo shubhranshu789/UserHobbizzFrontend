@@ -16,10 +16,6 @@ import Footer from "../../../Footer/page"
 
 import { useRouter } from 'next/navigation';
 
-
-// import "../../../../Components/Auth"
-
-
 type Activity = {
   _id: string;
   title: string;
@@ -28,18 +24,9 @@ type Activity = {
   category: string;
   postedBy: string[];
   Registrations: string[];
-  uploads: any[];
+  uploads: any[]; // refine if needed
   createdAt: string;
   updatedAt: string;
-};
-
-type ApprovedUpload = {
-  _id: string;
-  pic: string;
-  name: string;
-  email: string;
-  uploadedBy: string;
-  createdAt: string;
 };
 
 function Page() {
@@ -58,18 +45,13 @@ function Page() {
 
 
   const router = useRouter();
-
   // const gotoSignUp = () => {
   //   router.push('/Components/Auth');
   // };
 
-  const gotoSignUp = () => {
-    router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
+    const gotoSignUp = () => {
+    router.push(`/CraftClub/Auth?id=${encodeURIComponent("craftclub")}`);
   };
-
-
-
-
 
 
   useEffect(() => {
@@ -86,7 +68,7 @@ function Page() {
       }
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/getactivity/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftgetCompitition/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -97,7 +79,6 @@ function Page() {
       });
   }, [id]);
 
-  // Separate effect to check registration once both event & userId are set
   useEffect(() => {
     if (event && userId) {
       const registered = event.Registrations?.includes(userId);
@@ -105,16 +86,13 @@ function Page() {
     }
   }, [event, userId]);
 
-
-
-
   useEffect(() => {
     const fetchUploadStatus = async () => {
       if (!isRegistered) return;
 
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/has-uploaded/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/crafthas-uploaded-compitition/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -129,12 +107,11 @@ function Page() {
     fetchUploadStatus();
   }, [isRegistered, id]);
 
-
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event-participants/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftevent-participants-compi/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -151,34 +128,6 @@ function Page() {
     fetchParticipants();
   }, [id]);
 
-
-  const [approvedUploads, setApprovedUploads] = useState<ApprovedUpload[]>([]);
-  const [loadingApproved, setLoadingApproved] = useState(false);
-
-  useEffect(() => {
-    const fetchApprovedUploads = async () => {
-      try {
-        setLoadingApproved(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/activity/approved-uploads/${event?._id}`);
-        const data = await res.json();
-        setApprovedUploads(data.approvedUploads || []);
-      } catch (error) {
-        console.error("Error fetching approved uploads", error);
-      } finally {
-        setLoadingApproved(false);
-      }
-    };
-
-    if (event?._id) {
-      fetchApprovedUploads();
-    }
-  }, [event?._id]);
-
-
-
-
-
-
   const handleRegister = (activityId: string) => {
     if (!token) {
       alert("You must be logged in to register.");
@@ -188,14 +137,9 @@ function Page() {
     registerForActivity(activityId);
   };
 
-
-
-
-
-
   const registerForActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftregister-compitition/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -221,7 +165,7 @@ function Page() {
 
   const unregisterFromActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/unregister-activity/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftunregister-compitition/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -243,8 +187,6 @@ function Page() {
       alert("An error occurred while unregistering.");
     }
   };
-
-
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -277,7 +219,7 @@ function Page() {
 
       if (result.url) {
         const token = localStorage.getItem("jwt");
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload-photo/${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftupload-photo-compitition/${id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -303,19 +245,35 @@ function Page() {
     }
   };
 
+  const [approvedUploads, setApprovedUploads] = useState([]);
+  const [loadingApproved, setLoadingApproved] = useState(true);
 
+  useEffect(() => {
+    const fetchApprovedUploads = async () => {
+      try {
+        setLoadingApproved(true);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftactivity/approved-uploads/${event?._id}`);
+        const data = await res.json();
+        setApprovedUploads(data.approvedUploads || []);
+      } catch (error) {
+        console.error("Error fetching approved uploads", error);
+      } finally {
+        setLoadingApproved(false);
+      }
+    };
 
-
-
+    if (event?._id) {
+      fetchApprovedUploads();
+    }
+  }, [event?._id]);
 
   return (
-    <div >
+    <div>
       <NavBar />
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section with Event Image */}
           <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden mb-8 shadow-xl">
-            <Image src={event?.pic || "/placeholder.svg"} alt={event?.title || "/placeholder.svg"} fill className="object-cover" priority />
+            <Image src={event?.pic || ""} alt={event?.title || ""} fill className="object-cover" priority />
             <div className="absolute inset-0 bg-black/30 flex items-end">
               <div className="p-6 w-full">
                 <Badge className="mb-2 bg-primary hover:bg-primary/90 capitalize">{event?.category}</Badge>
@@ -324,7 +282,6 @@ function Page() {
             </div>
           </div>
 
-          {/* Event Details Card */}
           <Card className="mb-8 shadow-lg">
             <CardHeader className="pb-3">
               <h2 className="text-2xl font-semibold">Event Details</h2>
@@ -336,25 +293,13 @@ function Page() {
                   <p className="text-muted-foreground">{event?.desc}</p>
                 </div>
 
-
-
-
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-
-                  <div className="flex items-center gap-2">
-                    <User className="h-5 w-5 text-muted-foreground" />
-                    <span>Posted by: {event?.postedBy[0].substring(0, 8)}...</span>
-                  </div>
+                  
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-muted-foreground" />
                     <span>{event?.Registrations.length} Registrations</span>
                   </div>
                 </div>
-
-
-
               </div>
             </CardContent>
             <CardFooter>
@@ -370,12 +315,8 @@ function Page() {
               >
                 {isRegistered ? "Unregister" : "Register for Event"}
               </Button>
-
-
-
             </CardFooter>
           </Card>
-
 
           <div style={{ marginBottom: "30px" }}>
             {isRegistered ? (
@@ -423,67 +364,7 @@ function Page() {
               </div>
             )}
           </div>
-
-
-          {/* Registration Status Card */}
-
-
-
-
-
-
-
-
-
-
-          {/* Event ID Display */}
-          {/* <div className="mt-6 text-center">
-                      <p className="text-xs text-muted-foreground">Event ID: {event._id}</p>
-                    </div> */}
-
-
         </div>
-
-
-
-        <div>
-          <div className="mt-10">
-            <h2 className="text-xl font-semibold mb-4">✅ Approved Uploads</h2>
-
-            {loadingApproved ? (
-              <p className="text-sm text-muted-foreground">Loading approved uploads...</p>
-            ) : approvedUploads?.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No uploads approved yet.</p>
-            ) : (
-              <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {approvedUploads.map((upload) => (
-                  <li
-                    key={upload._id}
-                    className="bg-white rounded-lg shadow-md border p-4 space-y-2"
-                  >
-                    <div className="w-full h-48 overflow-hidden rounded">
-                      <img
-                        src={upload.pic}
-                        alt="Approved Upload"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">{upload.name}</p>
-                      <p className="text-sm text-gray-600">{upload.email}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Uploaded on {new Date(upload.createdAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-
-          </div>
-        </div>
-
       </div>
 
       <Footer />
