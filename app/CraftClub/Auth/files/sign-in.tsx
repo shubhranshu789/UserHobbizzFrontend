@@ -71,7 +71,8 @@ export default function SignIn() {
 
 
         //sending data to server
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftsignin`, {
+        //fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftsignin`, {
+        fetch(`http://localhost:5000/craftsignin`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",

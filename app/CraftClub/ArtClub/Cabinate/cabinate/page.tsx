@@ -42,7 +42,7 @@ export default function ClubCabinetPage() {
         }else {
           // Fallback data if no user in localStorage
           setUserData({
-            club: "artclub",
+            club: "craftclub",
             district:"",
             school:"",
           })
@@ -60,7 +60,8 @@ export default function ClubCabinetPage() {
         setError(null)
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/get-cabinate?club=${encodeURIComponent("artclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/get-cabinate-craft?club=${encodeURIComponent("craftclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
+          //`http://localhost:5000/get-cabinate-craft?club=${encodeURIComponent("craftclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
         )
 
         if (!response.ok) {

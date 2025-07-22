@@ -156,14 +156,14 @@ export default function ArtClubNavbar() {
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <div style={{ cursor: "pointer" }} onClick={() => {
-                            router.push("/Components/ArtClub/home");
+                            router.push("/CraftClub/ArtClub/home");
                         }} className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
                                 <Palette className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                    Art Club
+                                    Craft Club
                                 </h1>
                                 <p className="text-xs text-gray-500 hidden sm:block">Where creativity meets passion</p>
                             </div>

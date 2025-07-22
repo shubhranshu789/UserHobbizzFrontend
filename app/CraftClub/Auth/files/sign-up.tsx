@@ -537,7 +537,8 @@ function CompleteRegistrationForm() {
     )
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftsignup`, {
+      //const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftsignup`, {
+      const response = await fetch(`http://localhost:5000/craftsignup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
