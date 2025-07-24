@@ -223,7 +223,8 @@ export default function ArtClubNavbar() {
                                         }
                                         if (item.id == "Logout") {
                                             localStorage.clear()
-                                            router.push("/CraftClub/Auth/files/SignIn")
+                                            // router.push("/CraftClub/Auth/files/SignIn")
+                                            logout()
                                         }
 
                                     }}
@@ -294,7 +295,8 @@ export default function ArtClubNavbar() {
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/CraftClub/Auth/files/SignIn")
+                                                        // router.push("/CraftClub/Auth/files/SignIn")
+                                                        logout()
                                                     }
 
                                                 }}
@@ -406,7 +408,8 @@ export default function ArtClubNavbar() {
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/CraftClub/Auth/files/SignIn")
+                                                        // router.push("/CraftClub/Auth/files/SignIn")
+                                                        logout()
                                                     }
 
                                                 }}

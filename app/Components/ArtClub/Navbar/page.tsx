@@ -223,7 +223,8 @@ export default function ArtClubNavbar() {
                                         }
                                         if (item.id == "Logout") {
                                             localStorage.clear()
-                                            router.push("/Components/Auth/files/SignIn")
+                                            // router.push("/Components/Auth/files/SignIn")
+                                            logout()
                                         }
 
                                     }}
@@ -294,7 +295,9 @@ export default function ArtClubNavbar() {
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/Components/Auth/files/SignIn")
+                                                        // router.push("/Components/Auth/files/SignIn")
+                                                        logout()
+
                                                     }
 
                                                 }}
@@ -406,7 +409,8 @@ export default function ArtClubNavbar() {
                                                     }
                                                     if (item.id == "Logout") {
                                                         localStorage.clear()
-                                                        router.push("/Components/Auth/files/SignIn")
+                                                        // router.push("/Components/Auth/files/SignIn")
+                                                        logout()
                                                     }
 
                                                 }}

@@ -18,7 +18,7 @@ import { Globe, Landmark } from "lucide-react"
 import { Activity, HeartPulse } from "lucide-react"
 
 
-// import ArtWelcomePage from "../Components/ArtClub/home"
+// import ArtWelcomePage from "../TechClub/TechClub/home"
 
 // import "../CraftClub/home"
 
@@ -38,7 +38,7 @@ export default function HomePage() {
   };
 
   const TechPageWelcome = () => {
-    router.push(`/TechClub/ArtClub/home?id=${encodeURIComponent("craftclub")}`);
+    router.push(`/TechClub/TechClub/home?id=${encodeURIComponent("techclub")}`);
   };
 
 

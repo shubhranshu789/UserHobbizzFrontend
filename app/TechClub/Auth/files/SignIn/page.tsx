@@ -1,5 +1,5 @@
 import React from 'react'
-import SignIn from "../../../../Components/Auth/files/sign-in"
+import SignIn from "../../../../TechClub/Auth/files/sign-in"
 
 function page() {
   return (
