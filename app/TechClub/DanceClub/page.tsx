@@ -4,7 +4,9 @@ import Image from "next/image"
 import { Search, Bell, Palette, ImageIcon, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import DraggableElement from "../ArtClub/files/draggable-element"
+// import DraggableElement from "../ArtClub/files/draggable-element"
+import DraggableElement from "../TechClub/files/draggable-element"
+
 
 
 import { useRouter } from 'next/navigation';
