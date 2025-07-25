@@ -53,6 +53,9 @@ import Navbar from "../Navbar/page"
 // import "../../../Components/Views/HallOfFame"
 
 
+// import "../../../TechClub/Auth/files/SignUp"
+
+
 
 export default function TechClubHomepage() {
   const [isFloatingMenuOpen, setIsFloatingMenuOpen] = useState(false)
@@ -157,8 +160,13 @@ export default function TechClubHomepage() {
   ]
 
   const GoToTechAuthPage = () => {
-    router.push(`/TechClub/Auth?id=${encodeURIComponent("techclub")}`);
+    router.push("/TechClub/Auth/SignIn")
   }
+
+    const TechPageWelcome = () => {
+    router.push(`/TechClub/TechClub/home?id=${encodeURIComponent("techclub")}`);
+  };
+
   
   return (
     <div className="min-h-screen bg-white relative overflow-hidden" style={{ userSelect: "text" }}>

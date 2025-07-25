@@ -18,7 +18,7 @@ import { Globe, Landmark } from "lucide-react"
 import { Activity, HeartPulse } from "lucide-react"
 
 
-// import ArtWelcomePage from "../Components/ArtClub/home"
+// import ArtWelcomePage from "../TechClub/TechClub/home"
 
 // import "../CraftClub/home"
 
