@@ -38,7 +38,7 @@ export default function HomePage() {
   };
 
   const TechPageWelcome = () => {
-    router.push(`/TechClub/ArtClub/home?id=${encodeURIComponent("craftclub")}`);
+    router.push(`/TechClub/TechClub/home?id=${encodeURIComponent("techclub")}`);
   };
 
 

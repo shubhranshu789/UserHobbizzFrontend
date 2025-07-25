@@ -60,7 +60,8 @@ export default function ClubCabinetPage() {
         setError(null)
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/get-cabinate?club=${encodeURIComponent("artclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
+         `${process.env.NEXT_PUBLIC_API_URL}/get-cabinate-tech?club=${encodeURIComponent("techclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
+          //`http://localhost:5000/get-cabinate-tech?club=${encodeURIComponent("techclub")}&district=${encodeURIComponent(userData.district)}&school=${encodeURIComponent(userData.school)}`,
         )
 
         if (!response.ok) {

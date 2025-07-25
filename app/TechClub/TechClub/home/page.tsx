@@ -157,7 +157,7 @@ export default function TechClubHomepage() {
   ]
 
   const GoToTechAuthPage = () => {
-    router.push("/TechClub/Auth/SignIn")
+    router.push(`/TechClub/Auth?id=${encodeURIComponent("techclub")}`);
   }
   
   return (

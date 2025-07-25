@@ -165,7 +165,7 @@ const LocalEventsDisplayPage = () => {
                     <MapPin className="w-4 h-4" />
                     <span className="text-sm">Venue: {event.venue}</span>
                   </div>
-                  <Link href={`/Components/ArtClub/LocalEvents/Overview?event_id=${encodeURIComponent(event.event_id)}`}>
+                  <Link href={`/TechClub/TechClub/LocalEvents/Overview?event_id=${encodeURIComponent(event.event_id)}`}>
                     <Button
                       className={`w-full ${
                         isPast
