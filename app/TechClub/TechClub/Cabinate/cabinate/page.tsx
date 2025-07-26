@@ -42,7 +42,7 @@ export default function ClubCabinetPage() {
         }else {
           // Fallback data if no user in localStorage
           setUserData({
-            club: "artclub",
+            club: "techclub",
             district:"",
             school:"",
           })
