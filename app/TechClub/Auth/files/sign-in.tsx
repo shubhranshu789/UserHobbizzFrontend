@@ -67,8 +67,8 @@ export default function SignIn() {
 
 
         //sending data to server
-        //fetch(`${process.env.NEXT_PUBLIC_API_URL}/techsignin`, {
-        fetch(`http://localhost:5000/techsignin`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/techsignin`, {
+        //fetch(`http://localhost:5000/techsignin`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",

@@ -160,7 +160,7 @@ export default function TechClubHomepage() {
   ]
 
   const GoToTechAuthPage = () => {
-    router.push("/TechClub/Auth/SignIn")
+    router.push("/TechClub/Auth/files/SignIn")
   }
 
     const TechPageWelcome = () => {
