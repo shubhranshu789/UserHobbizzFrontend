@@ -49,7 +49,7 @@ const HallOfFameForm = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/heritage`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techheritage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -72,7 +72,7 @@ const HallOfFameForm = () => {
   const fetchItems = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/heritagegetallpost`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techheritagegetallpost`);
       const data = await res.json();
       if (res.ok) setItems(data.data || []);
       else toast.error(data.message || "Error fetching data");
@@ -84,7 +84,7 @@ const HallOfFameForm = () => {
   };
 
   const handleClickSubmitId = (id: any) => {
-    router.push(`/Components/ArtClub/Heritage/ViewParticularHeritage?id=${id}`);
+    router.push(`/TechClub/TechClub/Heritage/ViewParticularHeritage?id=${id}`);
   };
 
   useEffect(() => {

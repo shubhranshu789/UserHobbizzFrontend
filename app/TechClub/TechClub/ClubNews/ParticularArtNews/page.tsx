@@ -46,7 +46,7 @@ function Page() {
   useEffect(() => {
     const fetchJournal = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/artNews/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techartNews/${id}`)
         if (!response.ok) {
           throw new Error("Journal not found")
         }

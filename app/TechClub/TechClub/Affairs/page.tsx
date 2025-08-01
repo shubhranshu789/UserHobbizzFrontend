@@ -69,7 +69,7 @@ function ReviewActitvity() {
 
 
   const handleClickSubmitId = (id: any) => {
-   router.push(`/Components/ArtClub/Affairs/ParticularAffair?id=${id}`);
+   router.push(`/TechClub/TechClub/Affairs/ParticularAffair?id=${id}`);
   };
 
 
@@ -82,7 +82,7 @@ function ReviewActitvity() {
         //     return;
         // }
 
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/allActivities`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/techallActivities`, {
             headers: {
                 // Authorization: "Bearer " + localStorage.getItem("jwt"),
             },

@@ -50,7 +50,7 @@ function Page() {
   // };
 
     const gotoSignUp = () => {
-    router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
+    router.push(`/TechClub/Auth?id=${encodeURIComponent("techclub")}`);
   };
 
 
@@ -68,7 +68,7 @@ function Page() {
       }
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/getCompitition/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/techgetCompitition/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -92,7 +92,7 @@ function Page() {
 
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/has-uploaded-compitition/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techhas-uploaded-compitition/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -111,7 +111,7 @@ function Page() {
     const fetchParticipants = async () => {
       try {
         const token = localStorage.getItem("jwt");
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event-participants-compi/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techevent-participants-compi/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -139,7 +139,7 @@ function Page() {
 
   const registerForActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register-compitition/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techregister-compitition/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +165,7 @@ function Page() {
 
   const unregisterFromActivity = async (activityId: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/unregister-compitition/${activityId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techunregister-compitition/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -219,7 +219,7 @@ function Page() {
 
       if (result.url) {
         const token = localStorage.getItem("jwt");
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload-photo-compitition/${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techupload-photo-compitition/${id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -252,7 +252,7 @@ function Page() {
     const fetchApprovedUploads = async () => {
       try {
         setLoadingApproved(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/activity/approved-uploads/${event?._id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/techactivity/approved-uploads/${event?._id}`);
         const data = await res.json();
         setApprovedUploads(data.approvedUploads || []);
       } catch (error) {
@@ -294,10 +294,10 @@ function Page() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
+                  {/* <div className="flex items-center gap-2">
                     <User className="h-5 w-5 text-muted-foreground" />
                     <span>Posted by: {event?.postedBy[0].substring(0, 8)}...</span>
-                  </div>
+                  </div> */}
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-muted-foreground" />
                     <span>{event?.Registrations.length} Registrations</span>
