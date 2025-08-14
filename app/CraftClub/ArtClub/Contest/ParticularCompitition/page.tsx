@@ -155,7 +155,7 @@ function Page() {
         window.location.reload();
       } else {
         alert(data.message || "You must login before participation.");
-        gotoSignUp();
+        // gotoSignUp();
       }
     } catch (error) {
       console.error("Registration error:", error);

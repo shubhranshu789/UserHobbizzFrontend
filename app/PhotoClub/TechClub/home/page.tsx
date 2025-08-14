@@ -66,6 +66,72 @@ export default function TechClubHomepage() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
   const router = useRouter();
 
+
+
+  interface USER {
+    _id?: string;
+    name: string;
+    email: string;
+    state: string;
+    district: string;
+    school: string;
+    password: string;
+    club: string;
+    ip: string;
+    joinedClubs: string[];
+  }
+
+  const userString = localStorage.getItem("user") ?? "";
+  const user: USER | null = userString ? JSON.parse(userString) as USER : null;
+
+
+  const GotoSignUp = () => {
+    router.push(`/PhotoClub/Auth?id=${encodeURIComponent("photoclub")}`);
+  };
+
+
+
+  const joinClub = async () => {
+    try {
+      // Get logged-in user from localStorage
+      const userString = localStorage.getItem("user");
+      if (!userString) {
+        alert("Please login to join the club!");
+        return;
+      }
+
+      const user = JSON.parse(userString);
+
+      // Send the request to your API
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinPhotoClub/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        console.log("Updated user:", data.user);
+
+        // Update localStorage to keep frontend in sync
+        localStorage.setItem("user", JSON.stringify(data.user));
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error joining club:", error);
+      alert("Something went wrong. Please try again later.");
+    }
+  };
+
+
+
+
+
+
   useEffect(() => {
     // Page load animation
     setIsLoaded(true)
@@ -214,17 +280,32 @@ export default function TechClubHomepage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  // onClick={() => {
-                  //   document.getElementById("join-section")?.scrollIntoView({ behavior: "smooth" })
-                  // }}
-                  onClick={() => { GoToTechAuthPage() }}
-                >
-                  <Sparkles className="w-5 h-5 mr-2" />
-                  Join the Tech Club
-                </Button>
+                {!user && (
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl"
+                    onClick={() => {
+                      GotoSignUp();
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Join the Community
+                  </Button>
+                )}
+
+
+                {user && (
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    onClick={() => {
+                      joinClub();
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Join Club
+                  </Button>
+                )}
 
               </div>
             </div>

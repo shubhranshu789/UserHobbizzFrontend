@@ -112,6 +112,43 @@ export default function ArtClubNavbar() {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem("jwt") : null;
 
+
+    interface User {
+        _id: string;
+        name: string;
+        email: string;
+        state: string;
+        district: string;
+        school: string;
+        password?: string; // optional if not always present
+        club: string;
+        ip?: string;
+        joinedClubs: string[];
+    }
+
+
+    const userDataString = localStorage.getItem("user");
+
+    let userData: User | null = null;
+
+    if (userDataString) {
+        try {
+            userData = JSON.parse(userDataString) as User;
+        } catch (e) {
+            console.error("Error parsing user data", e);
+        }
+    }
+
+    const gotoProfile = () => {
+        if (!userData) {
+            console.error("No user data, cannot go to profile");
+            throw new Error("No user data found. Please log in.");
+            // Or you can do: router.push("/login");
+        }
+
+        router.push(`/PhotoClub/Profile?userid=${userData._id}`);
+    };
+
     const router = useRouter();
     const navigationItems = [
         { name: "Cabinet", icon: Users, id: "Cabinet" },
@@ -325,6 +362,7 @@ export default function ArtClubNavbar() {
                                     variant="ghost"
                                     size="sm"
                                     className="hidden sm:flex text-[#2b7fff] hover:text-[#1a5fd6]"
+                                    onClick={() => { gotoProfile() }}
                                 >
                                     Profile
                                 </Button>

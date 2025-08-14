@@ -20,12 +20,15 @@ import { Activity, HeartPulse } from "lucide-react"
 
 // import ArtWelcomePage from "../TechClub/TechClub/home"
 
-// import "../CraftClub/home"
+// import "../Components/Auth/files/SignUp"
 
 export default function HomePage() {
   const router = useRouter();
 
   const AuthPageArt = () => {
+    router.push('/Components/Auth/files/SignUp');
+  };
+  const AuthPage = () => {
     router.push('/Components/Auth/SignUp');
   };
 
@@ -68,7 +71,8 @@ export default function HomePage() {
             <a href="#testimonials" className="text-gray-600 hover:text-[#357af3] transition-colors">
               Reviews
             </a> */}
-            {/* <Button onClick={() => {AuthPage()}} className="bg-[#357af3] hover:bg-[#2968d9] text-white">Get Started</Button> */}
+            {/* <Button onClick={() => {AuthPage()}} className="bg-[#357af3] hover:bg-[#2968d9] text-white">Sign In</Button> */}
+            <Button onClick={() => {AuthPageArt()}} className="bg-[#357af3] hover:bg-[#2968d9] text-white">Get Started</Button>
           </nav>
         </div>
       </header>

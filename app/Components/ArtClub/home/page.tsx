@@ -53,7 +53,7 @@ import { useRouter } from 'next/navigation';
 // import "../../../Components/ArtClub/Contest"
 // import "../../../Components/ArtClub/HallOfFame"
 
-// import "../../../Components/Auth"
+// import "../../../Profile"
 
 
 
@@ -66,11 +66,66 @@ export default function ArtClubHomepage() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
 
+  interface USER {
+    _id?: string;
+    name: string;
+    email: string;
+    state: string;
+    district: string;
+    school: string;
+    password: string;
+    club: string;
+    ip: string;
+    joinedClubs: string[];
+  }
+
+  const userString = localStorage.getItem("user") ?? "";
+  const user: USER | null = userString ? JSON.parse(userString) as USER : null;
+
   const router = useRouter();
 
   const GotoSignUp = () => {
     router.push(`/Components/Auth?id=${encodeURIComponent("artclub")}`);
   };
+
+
+
+  const joinClub = async () => {
+    try {
+      // Get logged-in user from localStorage
+      const userString = localStorage.getItem("user");
+      if (!userString) {
+        alert("Please login to join the club!");
+        return;
+      }
+
+      const user = JSON.parse(userString);
+
+      // Send the request to your API
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinArtClub/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        console.log("Updated user:", data.user);
+
+        // Update localStorage to keep frontend in sync
+        localStorage.setItem("user", JSON.stringify(data.user));
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error joining club:", error);
+      alert("Something went wrong. Please try again later.");
+    }
+  };
+
 
 
   const gotoHeritage = () => {
@@ -88,6 +143,7 @@ export default function ArtClubHomepage() {
   const gotoHallOfFame = () => {
     router.push(`/Components/ArtClub/HallOfFame`)
   }
+
 
 
 
@@ -232,7 +288,7 @@ export default function ArtClubHomepage() {
       <nav
         className={`relative z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200 sticky top-0 shadow-lg transition-all duration-1000 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
       >
-        <Navbar/>
+        <Navbar />
       </nav>
 
       {/* Hero Section */}
@@ -258,17 +314,33 @@ export default function ArtClubHomepage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  onClick={() => {
-                    GotoSignUp();
-                  }}
-                >
-                  <Sparkles className="w-5 h-5 mr-2" />
-                  Join the Art Club
-                </Button>
-                
+                {!user && (
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl"
+                    onClick={() => {
+                      GotoSignUp();
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Join the Community
+                  </Button>
+                )}
+
+
+                {user && (
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-300/50 hover:border-2 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    onClick={() => {
+                      joinClub();
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Join Club
+                  </Button>
+                )}
+
               </div>
             </div>
             <div className="relative">
@@ -328,7 +400,7 @@ export default function ArtClubHomepage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <Card onClick={() => {gotoHeritage()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { gotoHeritage() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Brush className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Traditional Art</CardTitle>
@@ -340,7 +412,7 @@ export default function ArtClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {gotoGallery()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { gotoGallery() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Camera className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Digital Art</CardTitle>
@@ -352,7 +424,7 @@ export default function ArtClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {gotoAffairs()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { gotoAffairs() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Users className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Community</CardTitle>
@@ -562,7 +634,7 @@ export default function ArtClubHomepage() {
       </section> */}
 
       {/* Upcoming Events */}
-   
+
 
       {/* Contests & Activities */}
       <section
@@ -581,7 +653,7 @@ export default function ArtClubHomepage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card onClick={() => {gotoContest()}} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { gotoContest() }} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <Trophy className="w-8 h-8 text-blue-600" />
@@ -608,7 +680,7 @@ export default function ArtClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {gotoHallOfFame()}} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { gotoHallOfFame() }} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <Award className="w-8 h-8 text-blue-600" />
@@ -664,7 +736,7 @@ export default function ArtClubHomepage() {
           </div>
         </div>
       </section>
-     
+
 
       {/* Footer */}
       <footer
@@ -771,7 +843,7 @@ export default function ArtClubHomepage() {
         </div>
       </footer>
 
-     
+
     </div>
   )
 }
