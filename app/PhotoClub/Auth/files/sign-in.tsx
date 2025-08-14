@@ -54,7 +54,7 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleClick1 = () => {
-    router.push(`/PhotoClub/Auth?id=${encodeURIComponent("techclub")}`);
+    router.push(`/PhotoClub/Auth?id=${encodeURIComponent("photoclub")}`);
   };
 
 
@@ -67,8 +67,8 @@ export default function SignIn() {
 
 
         //sending data to server
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/techsignin`, {
-        //fetch(`http://localhost:5000/techsignin`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/photosignin`, {
+        //fetch(`http://localhost:5000/photosignin`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
