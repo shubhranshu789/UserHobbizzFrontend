@@ -139,7 +139,7 @@ export default function TechClubHomepage() {
       const user = JSON.parse(userString);
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/userjoinArtClub/${user._id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/userjoinTechClub/${user._id}`,
         {
           method: "PUT",
           headers: {
