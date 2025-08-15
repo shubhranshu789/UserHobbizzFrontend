@@ -79,13 +79,57 @@ export default function TechClubHomepage() {
     joinedClubs: string[];
   }
 
-  const userString = localStorage.getItem("user") ?? "";
-  const user: USER | null = userString ? JSON.parse(userString) as USER : null;
+  const [user, setUser] = useState<USER | null>(null);
 
+  useEffect(() => {
+    const userString = localStorage.getItem("user") ?? "";
+    setUser(userString ? (JSON.parse(userString) as USER) : null);
+  }, []);
+
+
+  // const joinClub = async () => {
+  //   try {
+  //     // Get logged-in user from localStorage
+  //     const userString = localStorage.getItem("user");
+  //     if (!userString) {
+  //       alert("Please login to join the club!");
+  //       return;
+  //     }
+
+  //     const user = JSON.parse(userString);
+
+  //     // Send the request to your API
+  //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinTechClub/${user._id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       }
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (res.ok) {
+  //       alert(data.message);
+  //       console.log("Updated user:", data.user);
+
+  //       // Update localStorage to keep frontend in sync
+  //       localStorage.setItem("user", JSON.stringify(data.user));
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error joining club:", error);
+  //     alert("Something went wrong. Please try again later.");
+  //   }
+  // };
 
   const joinClub = async () => {
+    if (typeof window === "undefined") {
+      // LocalStorage doesn't exist! Exit early or handle appropriately.
+      return;
+    }
+
     try {
-      // Get logged-in user from localStorage
       const userString = localStorage.getItem("user");
       if (!userString) {
         alert("Please login to join the club!");
@@ -94,13 +138,15 @@ export default function TechClubHomepage() {
 
       const user = JSON.parse(userString);
 
-      // Send the request to your API
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinTechClub/${user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/userjoinArtClub/${user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          }
         }
-      });
+      );
 
       const data = await res.json();
 
@@ -108,7 +154,6 @@ export default function TechClubHomepage() {
         alert(data.message);
         console.log("Updated user:", data.user);
 
-        // Update localStorage to keep frontend in sync
         localStorage.setItem("user", JSON.stringify(data.user));
       } else {
         alert(data.message);
@@ -118,8 +163,6 @@ export default function TechClubHomepage() {
       alert("Something went wrong. Please try again later.");
     }
   };
-
-
   const router = useRouter();
 
   useEffect(() => {
@@ -222,11 +265,11 @@ export default function TechClubHomepage() {
     router.push("/TechClub/Auth/files/SignIn")
   }
 
-    const TechPageWelcome = () => {
+  const TechPageWelcome = () => {
     router.push(`/TechClub/TechClub/home?id=${encodeURIComponent("techclub")}`);
   };
 
-  
+
   return (
     <div className="min-h-screen bg-white relative overflow-hidden" style={{ userSelect: "text" }}>
       {/* Page Load Animation Overlay */}
@@ -249,7 +292,7 @@ export default function TechClubHomepage() {
         <div className="absolute bottom-10 right-10 w-28 h-28 bg-blue-700 rounded-full blur-lg animate-pulse"></div>
       </div>
 
-     <Navbar />
+      <Navbar />
 
       {/* Hero Section */}
       <section
@@ -358,7 +401,7 @@ export default function TechClubHomepage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <Card onClick={() => {goToHeritage()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { goToHeritage() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Brush className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Programming</CardTitle>
@@ -370,7 +413,7 @@ export default function TechClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {goToGallery()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { goToGallery() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Camera className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Robotics & Hardware</CardTitle>
@@ -382,7 +425,7 @@ export default function TechClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {goToAffair()}} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { goToAffair() }} className="bg-white border-gray-200 hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <Users className="w-12 h-12 text-blue-600 mb-4" />
                 <CardTitle className="text-black">Community</CardTitle>
@@ -611,7 +654,7 @@ export default function TechClubHomepage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card onClick={() => {goToCopition()}} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { goToCopition() }} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <Trophy className="w-8 h-8 text-blue-600" />
@@ -638,7 +681,7 @@ export default function TechClubHomepage() {
               </CardContent>
             </Card>
 
-            <Card onClick={() => {goToHallofFame()}} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
+            <Card onClick={() => { goToHallofFame() }} className="bg-white hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 border-2 border-transparent hover:border-blue-400 hover:bg-blue-50/30">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <Award className="w-8 h-8 text-blue-600" />

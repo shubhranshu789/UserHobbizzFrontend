@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import {
     Menu,
     Search,
@@ -106,11 +106,41 @@ const tabContent = {
     },
 }
 
-export default function ArtClubNavbar() {
+
+export default function WrappedPage() {
+    return (
+        <Suspense>
+            <ArtClubNavbar />
+        </Suspense>
+    )
+}
+
+
+function ArtClubNavbar() {
     const [activeTab, setActiveTab] = useState("overview")
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem("jwt") : null;
+    // const token = typeof window !== 'undefined' ? localStorage.getItem("jwt") : null;
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedToken = localStorage.getItem("jwt");
+            setToken(storedToken);
+        }
+    }, []);
+
+
+    const [userDataString, setUserDataString] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setUserDataString(localStorage.getItem("user"));
+        }
+    }, []);
+
+
+    
     interface User {
         _id: string;
         name: string;
@@ -151,7 +181,7 @@ export default function ArtClubNavbar() {
     );
 
 
-    const userDataString = localStorage.getItem("user");
+    // const userDataString = localStorage.getItem("user");
 
     let userData: User | null = null;
 
@@ -361,7 +391,7 @@ export default function ArtClubNavbar() {
                                     variant="ghost"
                                     size="sm"
                                     className="hidden sm:flex text-[#2b7fff] hover:text-[#1a5fd6]"
-                                    onClick={() => {gotoProfile()}}
+                                    onClick={() => { gotoProfile() }}
                                 >
                                     Profile
                                 </Button>

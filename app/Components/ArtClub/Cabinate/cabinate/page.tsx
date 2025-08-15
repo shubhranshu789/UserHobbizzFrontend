@@ -30,25 +30,25 @@ export default function ClubCabinetPage() {
 
   // Load user data from localStorage
   useEffect(() => {
-    const loadUserData = () => {
-        const storedUser = localStorage.getItem("user")
-        if (storedUser) {
-          const parsed = JSON.parse(storedUser)
-          setUserData({
-            club: parsed.club,
-            district: parsed.district,
-            school: parsed.school,
-          })
-        }else {
-          // Fallback data if no user in localStorage
-          setUserData({
-            club: "artclub",
-            district:"",
-            school:"",
-          })
-        }
-      }
-    loadUserData()}, [])
+  if (typeof window !== 'undefined') {
+    const storedUser = localStorage.getItem("user")
+    if (storedUser) {
+      const parsed = JSON.parse(storedUser)
+      setUserData({
+        club: parsed.club,
+        district: parsed.district,
+        school: parsed.school,
+      })
+    } else {
+      setUserData({
+        club: "artclub",
+        district: "",
+        school: "",
+      })
+    }
+  }
+}, [])
+
 
   // Fetch cabinet members
   useEffect(() => {

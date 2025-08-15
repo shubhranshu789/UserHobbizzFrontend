@@ -80,48 +80,91 @@ export default function ArtClubHomepage() {
     joinedClubs: string[];
   }
 
-  const userString = localStorage.getItem("user") ?? "";
-  const user: USER | null = userString ? JSON.parse(userString) as USER : null;
+  const [user, setUser] = useState<USER | null>(null);
+
+  useEffect(() => {
+    const userString = localStorage.getItem("user") ?? "";
+    setUser(userString ? (JSON.parse(userString) as USER) : null);
+  }, []);
 
 
+
+  // const joinClub = async () => {
+  //   try {
+  //     // Get logged-in user from localStorage
+  //     const userString = localStorage.getItem("user");
+  //     if (!userString) {
+  //       alert("Please login to join the club!");
+  //       return;
+  //     }
+
+  //     const user = JSON.parse(userString);
+
+  //     // Send the request to your API
+  //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinCraftClub/${user._id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       }
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (res.ok) {
+  //       alert(data.message);
+  //       console.log("Updated user:", data.user);
+
+  //       // Update localStorage to keep frontend in sync
+  //       localStorage.setItem("user", JSON.stringify(data.user));
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error joining club:", error);
+  //     alert("Something went wrong. Please try again later.");
+  //   }
+  // };
 
   const joinClub = async () => {
-    try {
-      // Get logged-in user from localStorage
-      const userString = localStorage.getItem("user");
-      if (!userString) {
-        alert("Please login to join the club!");
-        return;
-      }
+  if (typeof window === "undefined") {
+    // LocalStorage doesn't exist! Exit early or handle appropriately.
+    return;
+  }
 
-      const user = JSON.parse(userString);
+  try {
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      alert("Please login to join the club!");
+      return;
+    }
 
-      // Send the request to your API
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userjoinCraftClub/${user._id}`, {
+    const user = JSON.parse(userString);
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/userjoinCraftClub/${user._id}`,
+      {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         }
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert(data.message);
-        console.log("Updated user:", data.user);
-
-        // Update localStorage to keep frontend in sync
-        localStorage.setItem("user", JSON.stringify(data.user));
-      } else {
-        alert(data.message);
       }
-    } catch (error) {
-      console.error("Error joining club:", error);
-      alert("Something went wrong. Please try again later.");
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert(data.message);
+      console.log("Updated user:", data.user);
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } else {
+      alert(data.message);
     }
-  };
-
-
+  } catch (error) {
+    console.error("Error joining club:", error);
+    alert("Something went wrong. Please try again later.");
+  }
+};
 
   const router = useRouter();
 

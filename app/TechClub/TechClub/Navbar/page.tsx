@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import {
     Menu,
     Search,
@@ -106,11 +106,37 @@ const tabContent = {
     },
 }
 
-export default function ArtClubNavbar() {
+
+export default function WrappedPage() {
+    return (
+        <Suspense>
+            <ArtClubNavbar />
+        </Suspense>
+    )
+}
+
+function ArtClubNavbar() {
     const [activeTab, setActiveTab] = useState("overview")
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem("jwt") : null;
+    // const token = typeof window !== 'undefined' ? localStorage.getItem("jwt") : null;
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedToken = localStorage.getItem("jwt");
+            setToken(storedToken);
+        }
+    }, []);
+
+
+    const [userDataString, setUserDataString] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setUserDataString(localStorage.getItem("user"));
+        }
+    }, []);
 
 
     interface User {
@@ -155,7 +181,7 @@ export default function ArtClubNavbar() {
     );
 
 
-    const userDataString = localStorage.getItem("user");
+    // const userDataString = localStorage.getItem("user");
 
     let userData: User | null = null;
 

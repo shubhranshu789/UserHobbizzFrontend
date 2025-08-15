@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,6 +23,17 @@ interface HallOfFameItem {
     publishedAt?: string;
     createdAt?: string;
 }
+
+
+
+export default function WrappedPage() {
+  return (
+    <Suspense>
+      <HallOfFameForm />
+    </Suspense>
+  )
+}
+
 
 const HallOfFameForm = () => {
     const [formData, setFormData] = useState({
@@ -235,4 +246,4 @@ const HallOfFameForm = () => {
     );
 };
 
-export default HallOfFameForm;
+// default HallOfFameForm;

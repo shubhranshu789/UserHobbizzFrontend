@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect , Suspense} from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -19,7 +19,18 @@ interface UserProfile {
   joinedClubs: string[]
 }
 
-export default function ProfilePage() {
+
+
+export default function WrappedPage() {
+  return (
+    <Suspense>
+      <ProfilePage />
+    </Suspense>
+  )
+}
+
+
+function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
